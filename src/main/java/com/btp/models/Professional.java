@@ -15,13 +15,14 @@ public class Professional {
     private int replyTime;
     private String aboutMe;
     private String jobDescription;
+    private String fullName;
 
     public Professional() {
     }
 
     public Professional(int professionalId, int userId, String companyName, int isActive, String categoryName,
                         String professionName, String jobTitle, double avgRating, int yearsOfExperience,
-                        int queueSize, int replyTime, String aboutMe, String jobDescrtiption) {
+                        int queueSize, int replyTime, String aboutMe, String jobDescrtiption, String fullName) {
         this.professionalId = professionalId;
         this.userId = userId;
         this.companyName = companyName;
@@ -35,6 +36,7 @@ public class Professional {
         this.replyTime = replyTime;
         this.aboutMe = aboutMe;
         this.jobDescription = jobDescrtiption;
+        this.fullName = fullName;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class Professional {
                 + ", companyName=" + companyName + ", isActive=" + isActive + ", jobDescription=" + jobDescription
                 + ", jobTitle=" + jobTitle + ", professionName=" + professionName + ", professionalId=" + professionalId
                 + ", queueSize=" + queueSize + ", replyTime=" + replyTime + ", userId=" + userId
-                + ", yearsOfExperience=" + yearsOfExperience + "]";
+                + ", yearsOfExperience=" + yearsOfExperience + ", fullName=" + fullName + "]";
     }
 
     /**
@@ -226,5 +228,13 @@ public class Professional {
      */
     public void setJobDescription(String jobDescription) {
         this.jobDescription = jobDescription;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

@@ -71,7 +71,7 @@ public class UserService implements UserDetailsService {
             rs.getString("password"), rs.getString("school"), rs.getInt("is_active"), professional);
         }
 
-        cs = dbc.getConn().prepareCall("{call dbo.GET_PROFESSIONAL(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+        cs = dbc.getConn().prepareCall("{call dbo.GET_PROFESSIONAL(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
         cs.setInt("user_id", user.getUserId());
         cs.registerOutParameter("professional_id", Types.INTEGER);
         cs.registerOutParameter("company_name", Types.VARCHAR);
@@ -85,6 +85,7 @@ public class UserService implements UserDetailsService {
         cs.registerOutParameter("reply_time", Types.INTEGER);
         cs.registerOutParameter("about_me", Types.VARCHAR);
         cs.registerOutParameter("job_description", Types.VARCHAR);
+        cs.registerOutParameter("full_name", Types.VARCHAR);
 
         rs = cs.executeQuery();
 
@@ -93,7 +94,7 @@ public class UserService implements UserDetailsService {
                                     rs.getInt("is_active"),rs.getString("category_name"),rs.getString("profession_name"),
                                     rs.getString("job_title"), rs.getFloat("avg_rating"),rs.getInt("years_of_experience"),
                                     rs.getInt("queue_size"),rs.getInt("reply_time"),rs.getString("about_me"),
-                                    rs.getString("job_description"));
+                                    rs.getString("job_description"), rs.getString("full_name"));
         }
 
         if (professional != null) {
@@ -123,7 +124,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (user != null) {
-            cs = dbc.getConn().prepareCall("{call dbo.GET_PROFESSIONAL(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            cs = dbc.getConn().prepareCall("{call dbo.GET_PROFESSIONAL(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cs.setInt("user_id", user.getUserId());
             cs.registerOutParameter("professional_id", Types.INTEGER);
             cs.registerOutParameter("company_name", Types.VARCHAR);
@@ -137,6 +138,7 @@ public class UserService implements UserDetailsService {
             cs.registerOutParameter("reply_time", Types.INTEGER);
             cs.registerOutParameter("about_me", Types.VARCHAR);
             cs.registerOutParameter("job_description", Types.VARCHAR);
+            cs.registerOutParameter("full_name", Types.VARCHAR);
     
             rs = cs.executeQuery();
     
@@ -145,7 +147,7 @@ public class UserService implements UserDetailsService {
                                         rs.getInt("is_active"),rs.getString("category_name"),rs.getString("profession_name"),
                                         rs.getString("job_title"), rs.getFloat("avg_rating"),rs.getInt("years_of_experience"),
                                         rs.getInt("queue_size"),rs.getInt("reply_time"),rs.getString("about_me"),
-                                        rs.getString("job_description"));
+                                        rs.getString("job_description"),rs.getString("full_name"));
             }
     
             if (professional != null) {

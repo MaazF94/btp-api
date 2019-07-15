@@ -1,7 +1,9 @@
 package com.btp.api;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.btp.models.Professional;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,6 +39,23 @@ public class ProfessionalController {
             LOG.error(e.getMessage(), e);
             returnMap.put("response", "Professional already exists");
             returnMap.put("professionalId", professionalId);
+        }
+
+        return returnMap;
+    }
+
+    @PostMapping(value="/searchResult")
+    public Map<String, Object> searchResult(@RequestBody String searchQuery) {
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        List<Professional> searchResult = new ArrayList<Professional>();
+        try {
+            searchResult = professionalService.getSearchResult(searchQuery);
+            returnMap.put("response", "");
+            returnMap.put("searchResult", searchResult);
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+            returnMap.put("response", "Error while searching...");
+            returnMap.put("searchResult", searchResult);
         }
 
         return returnMap;
